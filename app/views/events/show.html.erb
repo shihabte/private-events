@@ -1,0 +1,6 @@
+<h2><%= @event.title%> Details</h2>
+<p>
+    <strong>Date: </strong><%= @event.event_date%><br>
+    <strong>Place: </strong><%= @event.event_location%><br>
+    <strong> Created By: </strong><%=User.find(@event.creator_id).email%>
+</p>
