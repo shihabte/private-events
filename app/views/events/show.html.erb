@@ -4,13 +4,42 @@
     <strong>Place: </strong><%= @event.event_location%><br>
     <strong> Created By: </strong><%= link_to @event.creator.email, user_path(@event.creator)%>
     <%if current_user==@event.creator%>
-    <li>
-      <%=link_to "Edit", edit_event_path(@event) %>
-      <%= link_to "Delete", event_path(@event), data: {
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-      } %>
-    </li>
+        <li>
+            <%=link_to "Edit", edit_event_path(@event) %>
+            <%= link_to "Delete", event_path(@event), data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+            } %>
+        </li>
     <%end%>
+    <%if user_signed_in?%>
+        <li>
+            <%if @event.attendees.include?(current_user) %>
+                <% attendance = @event.event_attendees.find_by(user_id: current_user.id)%>
+                <%= link_to "Leave Event", event_attendee_path(attendance), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                } %>
+            <%else%>
+                <%= link_to "Join Event", event_event_attendees_path(@event), data: {
+                    turbo_method: :post
+                } %>
+            <%end%>
+        </li>
+    <% else%>
+        <h3>Log In to Attend the Event!!</h3>
+    <%end%>
+
+    <h2>Event Attendee List:</h2>
+    <%if @event.attendees%>
+        <%@event.attendees.each do |attendee|%>
+            <li>
+                <%=link_to attendee.email, user_path(attendee) %>
+            </li>
+        <%end%>
+    <%else%>
+        <li>No One Attending This Event!!</li>
+    <%end%>
+
 
 </p>
