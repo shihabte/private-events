@@ -30,7 +30,7 @@
     <%= yield %>
     <% if user_signed_in? %>
       <p>
-        <h3> Signed in as:  <%= link_to current_user.email, user_path(current_user)%>!</h3>
+        <h3> Signed in as:  <%= link_to current_user.name, user_path(current_user)%>!</h3>
         <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
       </p>
     <% else %>

@@ -1,4 +1,9 @@
-<h2>Created Events by <%= link_to @user.email, user_path(@user) %></h2>
+<h1> Name: <%= @user.name %> </h1>
+<h1> Email: <%= @user.email %> </h1>
+<%if current_user==@user%>
+  <h3><%= link_to "Edit", edit_user_registration_path(current_user)%> Your Profile</h3>
+<%end%>
+<h2>Created Events:</h2>
 <ul>
   <% @user.created_events.each do |event| %>
     <li><%= link_to event.title, event_path(event)%><br>date: <%= event.event_date%><br><%=event.event_location%>
@@ -9,7 +14,7 @@
   <p><%= link_to "Create New Event", new_event_path%></p>
 <%end%>
 
-<h2>Attending Events by <%= link_to @user.email, user_path(@user) %></h2>
+<h2>Attending Events:</h2>
 <ul>
   <% @user.attended_events.each do |event| %>
     <li><%= link_to event.title, event_path(event)%><br>date: <%= event.event_date%><br><%=event.event_location%>

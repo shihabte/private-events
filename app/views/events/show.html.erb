@@ -2,7 +2,7 @@
 <p>
     <strong>Date: </strong><%= @event.event_date%><br>
     <strong>Place: </strong><%= @event.event_location%><br>
-    <strong> Created By: </strong><%= link_to @event.creator.email, user_path(@event.creator)%>
+    <strong> Created By: </strong><%= link_to @event.creator.name, user_path(@event.creator)%>
     <%if current_user==@event.creator%>
         <li>
             <%=link_to "Edit", edit_event_path(@event) %>
@@ -34,7 +34,7 @@
     <%if @event.attendees%>
         <%@event.attendees.each do |attendee|%>
             <li>
-                <%=link_to attendee.email, user_path(attendee) %>
+                <%=link_to attendee.name, user_path(attendee) %>
             </li>
         <%end%>
     <%else%>
