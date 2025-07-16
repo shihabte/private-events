@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   resources :events do
-    resources :event_attendees, only: [ :create, :destroy ], shallow: true
+    resources :event_attendees, only: [ :create, :destroy ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

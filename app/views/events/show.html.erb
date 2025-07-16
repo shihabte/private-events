@@ -16,7 +16,7 @@
         <li>
             <%if @event.attendees.include?(current_user) %>
                 <% attendance = @event.event_attendees.find_by(user_id: current_user.id)%>
-                <%= link_to "Leave Event", event_attendee_path(attendance), data: {
+                <%= link_to "Leave Event", event_event_attendee_path(attendance), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                 } %>

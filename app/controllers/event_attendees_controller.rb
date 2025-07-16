@@ -12,7 +12,7 @@ class EventAttendeesController < ApplicationController
   end
 
   def destroy
-    @attendance = EventAttendee.find(params[:id])
+    @attendance = EventAttendee.where(user_id: current_user.id).first
     @event = @attendance.event
     if current_user == @attendance.user
       @attendance.destroy
