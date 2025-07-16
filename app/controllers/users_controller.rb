@@ -6,7 +6,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @previous_events = @user.attended_events.where("event_date < ?", Date.current)
-    @upcoming_events = @user.attended_events.where("event_date >= ?", Date.current)
+    @user_created_events = @user.created_events.order(id: :desc)
+    @previous_events = @user.attended_events.where("event_date < ?", Date.current).order(event_date: :desc)
+    @upcoming_events = @user.attended_events.where("event_date >= ?", Date.current).order(:event_date)
   end
 end

@@ -4,6 +4,7 @@
   <% @upcoming_events.each do |event| %>
     <li>
       <%=link_to event.title, event_path(event)%>
+      - <%=event.event_date%>
     </li>
   <% end %>
 </ul>
@@ -13,6 +14,7 @@
   <% @previous_events.each do |event| %>
     <li>
       <%=link_to event.title, event_path(event)%>
+      - <%=event.event_date%>
     </li>
   <% end %>
 </ul>
