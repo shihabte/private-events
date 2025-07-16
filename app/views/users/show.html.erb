@@ -14,9 +14,17 @@
   <p><%= link_to "Create New Event", new_event_path%></p>
 <%end%>
 
-<h2>Attending Events:</h2>
+<h2>Upcoming Events:</h2>
 <ul>
-  <% @user.attended_events.each do |event| %>
+  <% @upcoming_events.each do |event| %>
+    <li><%= link_to event.title, event_path(event)%><br>date: <%= event.event_date%><br><%=event.event_location%>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Previously Attended Events:</h2>
+<ul>
+  <% @previous_events.each do |event| %>
     <li><%= link_to event.title, event_path(event)%><br>date: <%= event.event_date%><br><%=event.event_location%>
     </li>
   <% end %>

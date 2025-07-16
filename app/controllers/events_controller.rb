@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
   def index
-    @events = Event.all
+    @previous_events = Event.where("event_date < ?", Date.current)
+    @upcoming_events = Event.where("event_date >= ?", Date.current)
   end
 
   def show
