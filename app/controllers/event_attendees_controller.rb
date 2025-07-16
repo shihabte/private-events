@@ -1,13 +1,5 @@
 class EventAttendeesController < ApplicationController
   before_action :authenticate_user!
-  def index
-    @event = Event.find(params[:event_id])
-    @attendances = EventAttendee.where(event_id: params[:event_id])
-  end
-
-  def new
-    @attendance = EventAttendee.find_by(user_id: current_user.id)
-  end
 
   def create
     @event = Event.find(params[:event_id])
