@@ -14,13 +14,32 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.creator_id = current_user.id
+    @event.creator = current_user
 
     if @event.save
-      redirect_to root_path
+      redirect_to user_path(current_user)
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to event_path(@event)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to root_path
   end
 
 

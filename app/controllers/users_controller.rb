@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @events = Event.where(creator_id: params[:id]).all
+    @user = User.find(params[:id])
+    @events = @user.created_events
   end
 end
