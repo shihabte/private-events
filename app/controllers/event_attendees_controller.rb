@@ -1,13 +1,23 @@
 class EventAttendeesController < ApplicationController
   before_action :authenticate_user!
 
+  def show
+    @event_attendee = EventAttendee.new
+  end
+
   def create
     @event = Event.find(params[:event_id])
-    if @event.attendees.include?(current_user)
-      redirect_to @event, alert: "You are already attending this event."
+    user_to_add = User.find_by(email: params[:guest_email])
+    if user_to_add.nil?
+      redirect_to @event, alert: "A user with that email could not be found."
+      return
+    end
+
+    if @event.attendees.include?(user_to_add)
+      redirect_to @event, alert: "#{user_to_add.name} is already attending this event."
     else
-      @event.attendees << current_user
-      redirect_to @event, notice: "Success! You are now attending this event."
+      @event.attendees << user_to_add
+      redirect_to @event, notice: "Success! #{user_to_add.name} is now attending this event."
     end
   end
 

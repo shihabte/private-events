@@ -11,6 +11,7 @@
                 turbo_confirm: "Are you sure?"
             } %>
         </li>
+        <li> <%= render "event_attendees/add_user"%></li>
     <%end%>
     <%if user_signed_in?%>
         <li>
@@ -21,9 +22,7 @@
                     turbo_confirm: "Are you sure?"
                 } %>
             <%else%>
-                <%= link_to "Join Event", event_event_attendees_path(@event), data: {
-                    turbo_method: :post
-                } %>
+                <h2>Joining is Invite Only!!</h2>
             <%end%>
         </li>
     <% else%>

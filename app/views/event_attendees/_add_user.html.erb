@@ -1,0 +1,9 @@
+<%= form_with url: event_event_attendees_path(@event), method: :post, local: true do |form| %> 
+    <div>
+        <%= form.label :guest_email, "User's Email Address:" %>
+        <%= form.email_field :guest_email, placeholder: "user@example.com", required: true %>
+        <%= form.submit "Add To Event"%>
+    </div>
+    <div>
+    </div>
+<% end %>
