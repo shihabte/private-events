@@ -4,11 +4,8 @@ class Event < ApplicationRecord
   has_many :event_attendees
   has_many :attendees, through: :event_attendees, source: :user, dependent: :destroy
 
-  def self.previous
-    self.where("event_date < ?", Date.today)
-  end
+  scope :previous, -> { where("event_date < ?", Date.today) }
 
-  def self.upcoming
-    self.where("event_date >= ?", Date.today)
-  end
+  scope :upcoming, -> { where("event_date >= ?", Date.today) }
+
 end
