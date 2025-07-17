@@ -7,5 +7,4 @@ class Event < ApplicationRecord
   scope :previous, -> { where("event_date < ?", Date.today) }
 
   scope :upcoming, -> { where("event_date >= ?", Date.today) }
-
 end
